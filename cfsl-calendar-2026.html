@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFSL Calendar 2026</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- General Reset & Variables --- */
+        :root {
+            --brand-color: #0062FF;
+            --brand-hover: #004ecb;
+            --text-dark: #1e293b;
+            --text-light: #475569;
+            --bg-color: #f8fafc;
+            /* Reduced shadow for a cleaner, flatter look to maximize space */
+            --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .sinhala-text { font-family: 'Noto Serif Sinhala', serif; }
+
+        /* --- Layout Containers --- */
+        .container {
+            width: 100%;
+            /* Increased max-width for larger screens */
+            max-width: 1000px; 
+            /* Significantly reduced padding to maximize width */
+            padding: 30px 10px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Header Section --- */
+        header { text-align: center; margin-bottom: 30px; padding: 0 10px; }
+
+        h1 {
+            font-size: 1.6rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        p.intro {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        /* --- Buttons --- */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--brand-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 14px 0 rgba(0, 98, 255, 0.39);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            margin-bottom: 40px;
+        }
+
+        .btn-download:hover {
+            background-color: var(--brand-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-download i { margin-right: 8px; font-size: 1.1rem; }
+
+        /* --- Image Gallery --- */
+        .image-wrapper {
+            background: white;
+            /* Removed internal padding completely so image hits the edge */
+            padding: 0; 
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            cursor: zoom-in; /* Indicates the zoom feature */
+            position: relative;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-wrapper:hover img {
+            /* Subtle scale on hover to encourage clicking */
+            transform: scale(1.01);
+        }
+
+        /* Hint text overlay on desktop */
+        .zoom-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        /* --- Advanced Zoom Modal (Lightbox) --- */
+        #zoom-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: hidden; /* Prevent body scroll, handle image scroll manually */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* The modal image */
+        #modal-img {
+            transition: transform 0.3s ease, max-width 0.3s ease;
+            cursor: zoom-in;
+            
+            /* Default State: Fit to screen */
+            max-width: 98%;
+            max-height: 98vh;
+            object-fit: contain;
+        }
+
+        /* Zoomed State Class */
+        #modal-img.zoomed {
+            cursor: zoom-out;
+            cursor: grab;
+            max-width: none;
+            max-height: none;
+            width: 200%; /* 2x Zoom */
+            height: auto;
+            /* Enables scrolling via the container */
+        }
+        
+        /* Container allowing scroll when zoomed */
+        .modal-scroll-area {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: auto; /* Scrollbars appear if image is huge */
+        }
+
+        /* Modal Close Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .close-btn:hover { color: #bbb; background: rgba(255,255,255,0.1); }
+
+        /* Zoom Toolbar */
+        .toolbar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10001;
+        }
+        .tool-btn {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tool-btn:hover { background: rgba(255,255,255,0.4); }
+
+        /* --- Footer --- */
+        footer {
+            width: 100%;
+            text-align: center;
+            margin-top: auto; 
+            padding-bottom: 3rem; 
+            padding-top: 2rem;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        footer p { color: #94a3b8; font-size: 0.9rem; }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.4rem; }
+            .container { padding: 20px 0px; } /* Nearly edge to edge on mobile */
+            .image-wrapper { 
+                border-radius: 0; /* Flat look on mobile */
+                border-left: none;
+                border-right: none;
+                box-shadow: none;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+            }
+            header { padding: 0 20px; }
+            .zoom-hint { display: none; } /* Hide hint on mobile, tap is intuitive */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1 class="sinhala-text">
+                CFSL විසින් ප්‍රකාශිත 2026 නිල චෙස් තරඟ කාලසටහන
+            </h1>
+            
+            <p class="intro sinhala-text">
+                ශ්‍රී ලංකා චෙස් සම්මේලනය විසින් (CFSL) 2026 සඳහා ප්‍රකාශයට පත් කොට ඇති නව චෙස් තරඟ කාලසටහන පහතින් දක්වා ඇත.
+            </p>
+            <p class="intro sinhala-text">
+                ඔබට අවශ්‍ය නම් මෙම චෙස් තරඟ කාලසටහනේ PDF File එක පහතින් Download කර ගැනීමට හැක.
+            </p>
+        </header>
+
+        <a href="https://drive.google.com/file/d/1DM1AjFVrFFQGW19MI6yFcnVMtkX83a8S/view?usp=drive_link" target="_blank" class="btn-download">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+            Download PDF
+        </a>
+
+        <div class="image-wrapper" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/50jrL6zV/CFSL_Calendar_01.jpg" alt="CFSL Calendar Page 1">
+            <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</div>
+        </div>
+
+        <div class="image-wrapper" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/0Qr4DbSv/CFSL_Calendar_02.jpg" alt="CFSL Calendar Page 2">
+            <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</div>
+        </div>
+
+        <div class="image-wrapper" onclick="openModal(this)">
+            <img src="https://i.postimg.cc/FKTqYjYH/CFSL_Calendar_03.jpg" alt="CFSL Calendar Page 3">
+            <div class="zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</div>
+        </div>
+
+    </div>
+
+    <div id="zoom-modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        
+        <div class="modal-scroll-area" id="scroll-area">
+            <img id="modal-img" src="" onclick="toggleZoom()">
+        </div>
+
+        <div class="toolbar">
+            <button class="tool-btn" onclick="toggleZoom()">
+                <i class="fa-solid fa-expand"></i> <span id="zoom-text">Zoom In</span>
+            </button>
+            <button class="tool-btn" onclick="closeModal()">
+                <i class="fa-solid fa-xmark"></i> Close
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            &copy; <span id="year"></span> CHESS SAVIYA. All Rights Reserved.
+        </p>
+    </footer>
+
+    <script>
+        // --- Dynamic Year ---
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        });
+
+        // --- Advanced Zoom Logic ---
+        const modal = document.getElementById("zoom-modal");
+        const modalImg = document.getElementById("modal-img");
+        const scrollArea = document.getElementById("scroll-area");
+        const zoomText = document.getElementById("zoom-text");
+        let isZoomed = false;
+
+        // Open the modal with the clicked image
+        function openModal(wrapper) {
+            const img = wrapper.querySelector('img');
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+            isZoomed = false;
+            updateZoomState();
+            
+            // Disable background scrolling on body
+            document.body.style.overflow = "hidden"; 
+        }
+
+        // Close the modal
+        function closeModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto"; // Re-enable scroll
+        }
+
+        // Toggle Zoom (Fit vs 200%)
+        function toggleZoom() {
+            isZoomed = !isZoomed;
+            updateZoomState();
+        }
+
+        function updateZoomState() {
+            if (isZoomed) {
+                modalImg.classList.add("zoomed");
+                zoomText.textContent = "Zoom Out";
+                scrollArea.style.cursor = "grab";
+            } else {
+                modalImg.classList.remove("zoomed");
+                zoomText.textContent = "Zoom In";
+                scrollArea.style.cursor = "default";
+                
+                // Reset scroll position when zooming out
+                scrollArea.scrollTop = 0;
+                scrollArea.scrollLeft = 0;
+            }
+        }
+
+        // Close modal if clicking outside the image (in the black area)
+        scrollArea.addEventListener('click', function(e) {
+            if (e.target === scrollArea) {
+                closeModal();
+            }
+        });
+
+        // Enable dragging to scroll when zoomed (Simple Drag Logic)
+        let isDown = false;
+        let startX;
+        let startY;
+        let scrollTop;
+        let scrollLeft;
+
+        scrollArea.addEventListener('mousedown', (e) => {
+            if(!isZoomed) return;
+            isDown = true;
+            scrollArea.style.cursor = 'grabbing';
+            startX = e.pageX - scrollArea.offsetLeft;
+            startY = e.pageY - scrollArea.offsetTop;
+            scrollLeft = scrollArea.scrollLeft;
+            scrollTop = scrollArea.scrollTop;
+            e.preventDefault(); // Prevent default image drag
+        });
+
+        scrollArea.addEventListener('mouseleave', () => {
+            isDown = false;
+            if(isZoomed) scrollArea.style.cursor = 'grab';
+        });
+
+        scrollArea.addEventListener('mouseup', () => {
+            isDown = false;
+            if(isZoomed) scrollArea.style.cursor = 'grab';
+        });
+
+        scrollArea.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollArea.offsetLeft;
+            const y = e.pageY - scrollArea.offsetTop;
+            const walkX = (x - startX) * 1.5; // Scroll speed multiplier
+            const walkY = (y - startY) * 1.5;
+            scrollArea.scrollLeft = scrollLeft - walkX;
+            scrollArea.scrollTop = scrollTop - walkY;
+        });
+    </script>
+
+</body>
+</html>
