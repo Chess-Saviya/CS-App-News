@@ -132,7 +132,8 @@
         /* Image Grid Styling */
         .image-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            /* Changed from '1fr 1fr' to '1fr' for single column on all views */
+            grid-template-columns: 1fr; 
             gap: 15px;
             margin-top: 25px;
         }
@@ -192,9 +193,7 @@
                 font-size: 1rem; /* Readable text size */
             }
 
-            .image-grid {
-                grid-template-columns: 1fr; /* Stack images on mobile */
-            }
+            /* Removed redundant .image-grid media query since base style is now 1fr */
             
             .btn {
                 width: 50%;
