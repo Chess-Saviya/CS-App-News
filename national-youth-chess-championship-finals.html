@@ -12,9 +12,9 @@
     <style>
         /* CSS Variables for Branding */
         :root {
-            /* Brand color specified: #0062FF */
             --brand-color: #0062FF;
             --brand-color-hover: #004ecb;
+            --urgent-color: #FF7300;
             --text-dark: #1a1a1a;
             --text-gray: #4a4a4a;
             --bg-light: #f8f9fa;
@@ -32,7 +32,6 @@
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
-            /* Default to Poppins, fallback to Noto for Sinhala characters */
             font-family: 'Poppins', 'Noto Serif Sinhala', serif;
         }
 
@@ -104,14 +103,13 @@
         }
 
         .cta-text {
-            margin-bottom: 30px;
-            text-align: left;
+            margin-bottom: 15px;
+            text-align: center; /* Centered for better flow with countdown */
             font-weight: 600;
         }
 
         .btn {
             display: inline-block;
-            /* Using the brand color variable #0062FF */
             background-color: var(--brand-color);
             color: var(--white);
             padding: 15px 30px;
@@ -129,10 +127,77 @@
             box-shadow: 0 6px 20px rgba(0, 98, 255, 0.4);
         }
 
+        /* --- COUNTDOWN STYLING --- */
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .time-box {
+            background-color: var(--brand-color); /* Default Blue */
+            color: white;
+            width: 75px;
+            height: 75px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background-color 0.5s ease;
+        }
+
+        /* Urgent State (Last 24 Hours) */
+        .time-box.urgent {
+            background-color: var(--urgent-color); /* Orange */
+            animation: pulse-orange 2s infinite;
+        }
+
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0 0 rgba(255, 115, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 115, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 115, 0, 0); }
+        }
+
+        .time-val {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Registration Closed Status */
+        .status-closed {
+            display: none; /* Hidden by default */
+            padding: 12px 5px;
+            margin: 20px auto;
+            font-size: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            border: 3px solid #000;
+            color: #000;
+            border-radius: 8px;
+            text-transform: uppercase;
+            text-align: center;
+            width: 80%;
+            background-color: #fff;
+        }
+
         /* Image Grid Styling */
         .image-grid {
             display: grid;
-            /* Changed from '1fr 1fr' to '1fr' for single column on all views */
             grid-template-columns: 1fr; 
             gap: 15px;
             margin-top: 25px;
@@ -170,19 +235,19 @@
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
             .container {
-                padding: 20px 15px; /* Reduced padding for mobile */
+                padding: 20px 15px;
                 width: 100%;
                 box-shadow: none;
             }
 
             h1 {
-                font-size: 1.6rem; /* Smaller title on mobile */
+                font-size: 1.6rem;
                 margin-bottom: 50px;
             }
 
             h2 {
                 font-size: 1.25rem;
-                display: block; /* Full width border on mobile */
+                display: block;
             }
 
             ul {
@@ -190,14 +255,22 @@
             }
 
             p, li {
-                font-size: 1rem; /* Readable text size */
+                font-size: 1rem;
             }
 
-            /* Removed redundant .image-grid media query since base style is now 1fr */
-            
             .btn {
-                width: 50%;
+                width: 70%;
                 text-align: center;
+            }
+            
+            /* Adjust countdown size for very small screens */
+            .time-box {
+                width: 65px;
+                height: 65px;
+                margin-top: 15px;
+            }
+            .time-val {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -220,7 +293,29 @@
 
             <div class="cta-container">
                 <p class="cta-text">මෙම තරඟාවලිය සඳහා ලියාපදිංචි වීමට පහත Google Form එක සම්පූර්ණ කරන්න.</p>
-                <a href="https://forms.gle/iHeEpPasM9wRGpjAA" target="_blank" class="btn">Register Now >></a>
+                
+                <a href="https://forms.gle/iHeEpPasM9wRGpjAA" target="_blank" class="btn" id="reg-btn-1">Register Now >></a>
+                
+                <div id="countdown-wrap-1" class="countdown-wrapper">
+                    <div class="time-box box-1">
+                        <span class="time-val" id="d1">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-box box-1">
+                        <span class="time-val" id="h1">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-box box-1">
+                        <span class="time-val" id="m1">00</span>
+                        <span class="time-label">Mins</span>
+                    </div>
+                    <div class="time-box box-1">
+                        <span class="time-val" id="s1">00</span>
+                        <span class="time-label">Secs</span>
+                    </div>
+                </div>
+
+                <div id="status-1" class="status-closed">Registration Closed</div>
             </div>
 
             <div class="image-grid">
@@ -246,7 +341,29 @@
 
             <div class="cta-container">
                 <p class="cta-text">මෙම තරඟාවලිය සඳහා ලියාපදිංචි වීමට පහත Google Form එක සම්පූර්ණ කරන්න.</p>
-                <a href="https://forms.gle/Mh3P9kKXUxkeFLbz7" target="_blank" class="btn">Register Now >></a>
+                
+                <a href="https://forms.gle/Mh3P9kKXUxkeFLbz7" target="_blank" class="btn" id="reg-btn-2">Register Now >></a>
+                
+                <div id="countdown-wrap-2" class="countdown-wrapper">
+                    <div class="time-box box-2">
+                        <span class="time-val" id="d2">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-box box-2">
+                        <span class="time-val" id="h2">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-box box-2">
+                        <span class="time-val" id="m2">00</span>
+                        <span class="time-label">Mins</span>
+                    </div>
+                    <div class="time-box box-2">
+                        <span class="time-val" id="s2">00</span>
+                        <span class="time-label">Secs</span>
+                    </div>
+                </div>
+
+                <div id="status-2" class="status-closed">Registration Closed</div>
             </div>
 
             <div class="image-grid">
@@ -268,12 +385,77 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Footer Year
             const yearSpan = document.getElementById('year');
             const currentYear = new Date().getFullYear();
             yearSpan.textContent = currentYear;
+
+            // --- COUNTDOWN LOGIC ---
+
+            // Helper function to manage a single countdown
+            function initCountdown(targetDateStr, elements, btnId, wrapperId, statusId, boxClass) {
+                const targetDate = new Date(targetDateStr).getTime();
+                const btn = document.getElementById(btnId);
+                const wrapper = document.getElementById(wrapperId);
+                const status = document.getElementById(statusId);
+                const boxes = document.querySelectorAll(boxClass);
+
+                const interval = setInterval(function() {
+                    const now = new Date().getTime();
+                    const distance = targetDate - now;
+
+                    // 1. Check for Expiration
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        // Hide Button and Countdown
+                        if(btn) btn.style.display = "none";
+                        if(wrapper) wrapper.style.display = "none";
+                        // Show Status
+                        if(status) status.style.display = "block";
+                        return;
+                    }
+
+                    // 2. Check for Last 24 Hours (Urgency)
+                    // 24 hours in milliseconds = 24 * 60 * 60 * 1000 = 86400000
+                    if (distance < 86400000) {
+                        boxes.forEach(box => box.classList.add('urgent'));
+                    } else {
+                        boxes.forEach(box => box.classList.remove('urgent'));
+                    }
+
+                    // 3. Update Timer Display
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById(elements.d).innerHTML = days < 10 ? "0" + days : days;
+                    document.getElementById(elements.h).innerHTML = hours < 10 ? "0" + hours : hours;
+                    document.getElementById(elements.m).innerHTML = minutes < 10 ? "0" + minutes : minutes;
+                    document.getElementById(elements.s).innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+                }, 1000);
+            }
+
+            initCountdown(
+                "Dec 29, 2025 22:00:00",
+                { d: "d1", h: "h1", m: "m1", s: "s1" }, 
+                "reg-btn-1", 
+                "countdown-wrap-1", 
+                "status-1",
+                ".box-1"
+            );
+
+            initCountdown(
+                "Jan 7, 2026 22:00:00", 
+                { d: "d2", h: "h2", m: "m2", s: "s2" }, 
+                "reg-btn-2", 
+                "countdown-wrap-2", 
+                "status-2",
+                ".box-2"
+            );
         });
     </script>
 
 </body>
 </html>
-
