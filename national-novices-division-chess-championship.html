@@ -96,7 +96,8 @@
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            align-items: flex-start;
+            /* Default alignment for Desktop */
+            align-items: center; 
         }
 
         select {
@@ -108,6 +109,7 @@
             min-width: 250px;
             background-color: white;
             cursor: pointer;
+            height: 50px; /* Enforce height to match button */
         }
 
         select:focus {
@@ -131,7 +133,17 @@
             cursor: pointer;
             font-size: 1rem;
             text-align: center;
-            margin-top: 15px;
+            /* Default margin for Mobile logic */
+            margin-top: 15px; 
+            height: 50px; /* Enforce height to match select */
+            line-height: 26px; /* Vertical center text fix */
+        }
+
+        /* Specific fix for the Search button inside controls on Desktop */
+        @media (min-width: 601px) {
+            .search-controls .btn {
+                margin-top: 0; /* Remove margin on desktop to align with select */
+            }
         }
 
         .btn:hover {
@@ -143,6 +155,8 @@
         .btn-whatsapp {
             background-color: #25D366;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            /* Reset margin for regular content links if needed */
+            margin-top: 15px; 
         }
         
         .btn-whatsapp:hover {
@@ -307,6 +321,7 @@
             
             .search-controls {
                 flex-direction: column;
+                align-items: center; /* Keep centered in column mode */
             }
             
             select {
@@ -315,6 +330,7 @@
 
             .btn {
                 width: 100%;
+                margin-top: 15px; /* Ensure margin exists on mobile */
             }
         }
     </style>
@@ -331,17 +347,17 @@
             <div class="search-controls">
                 <select id="districtSelect">
                     <option value="" disabled selected>-- Select District --</option>
-                    </select>
+                </select>
                 <button id="searchBtn" class="btn">Search</button>
                 <div id="errorMsg" class="error-message">Please select a district to proceed.</div>
             </div>
         </section>
 
         <div id="dashboard-area">
-            </div>
+        </div>
 
         <div id="result-area">
-            </div>
+        </div>
 
         <footer>
             <p>&copy; <span id="year"></span> CHESS SAVIYA</p>
@@ -396,9 +412,9 @@
                 "kalutara": { 
                     active: true, 
                     nameEn: "Kalutara", 
-                    nameSi: "කළුතර" },
+                    nameSi: "කළුතර",
                     form: "https://forms.gle/cHG2MaWdKmw86P4M8",
-                    whatsapp: "https://chat.whatsapp.com/EgdobZIR32ECoAcgn5eiJ2",
+                    whatsapp: "https://chat.whatsapp.com/Egd0bZIR32ECoAcgn5eiJ2",
                     img1: "https://i.postimg.cc/Wzz6w4z7/N_Kalutara_Front.jpg",
                     img2: "https://i.postimg.cc/Hnn49Ln9/N_Kalutara_Back.jpg",
                     pdf: "https://drive.google.com/file/d/1bPvmqR1vQfOyNg-y4fN_U9Dfs1eOpy0z/view?usp=drive_link"
@@ -444,8 +460,8 @@
                 "puttalam": { 
                     active: true, 
                     nameEn: "Puttalam", 
-                    nameSi: "පුත්තලම" },
-                    form: "https://forms.gle/fXPRpvte8aUAfwDA",
+                    nameSi: "පුත්තලම",
+                    form: "https://docs.google.com/forms/d/e/1FAIpQLScbY_i7xW4mgK6cXfidzsF43cFIvKpJqR93dV_FeOanfZO1vg/viewform",
                     whatsapp: "https://chat.whatsapp.com/KRx1HH207tRLMCaJi0jhDW",
                     img1: "https://i.postimg.cc/brrH9vrH/N_Puttalam_Front.jpg",
                     img2: "https://i.postimg.cc/SRR7fKRC/N_Puttalam_Back.jpg",
@@ -586,6 +602,4 @@
     </script>
 
 </body>
-
 </html>
-
