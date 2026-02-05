@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Lanka National Major Division Chess Championships 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Variables for Branding */
+        :root {
+            --brand-color: #0062FF;
+            --brand-color-hover: #004ecb;
+            --text-dark: #1a1a1a;
+            --text-gray: #4a4a4a;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --border-radius: 12px;
+            --error-color: #d32f2f;
+        }
+
+        /* Global Resets */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-family: 'Poppins', 'Noto Serif Sinhala', serif;
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: var(--white);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--brand-color);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-family: 'Noto Serif Sinhala', serif;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 15px;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: #f0f7ff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .search-label {
+            display: block;
+            margin-bottom: 15px;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Default alignment for Desktop */
+            align-items: center; 
+        }
+
+        select {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            font-family: 'Noto Serif Sinhala', sans-serif; /* Changed to Sinhala font for dropdown */
+            min-width: 250px;
+            background-color: white;
+            cursor: pointer;
+            height: 50px; /* Enforce height to match button */
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--brand-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--brand-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 98, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            /* Default margin for Mobile logic */
+            margin-top: 15px; 
+            height: 50px; /* Enforce height to match select */
+            line-height: 26px; /* Vertical center text fix */
+        }
+
+        /* Specific fix for the Search button inside controls on Desktop */
+        @media (min-width: 601px) {
+            .search-controls .btn {
+                margin-top: 0; /* Remove margin on desktop to align with select */
+            }
+        }
+
+        .btn:hover {
+            background-color: var(--brand-color-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 98, 255, 0.4);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            /* Reset margin for regular content links if needed */
+            margin-top: 15px; 
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #1ebc57;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Inline Error Message */
+        .error-message {
+            color: var(--error-color);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+            width: 100%;
+        }
+
+        /* --- DASHBOARD (Initial View) --- */
+        #dashboard-area {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .dashboard-title {
+            font-family: 'Noto Serif Sinhala', serif;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .active-districts-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .active-districts-list li {
+            font-family: 'Noto Serif Sinhala', sans-serif;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .dashboard-full-msg {
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1.2rem;
+            color: var(--brand-color);
+            font-weight: 600;
+            padding: 20px;
+            background: #f0f7ff;
+            border-radius: 8px;
+        }
+
+        /* --- RESULT AREA --- */
+        #result-area {
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .district-header {
+            text-align: center;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 1.5rem;
+            color: var(--brand-color);
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .result-block {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .cta-group {
+            margin-bottom: 40px;
+        }
+
+        .cta-text {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 15px;
+            margin: 25px 0 40px 0;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Pending Box (Not Found) */
+        .pending-box {
+            border: 1px solid #000; /* Black Border */
+            background-color: #fff;
+            color: #000; /* Black Text */
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* Bottom Spacer */
+        .bottom-spacer {
+            height: 3rem;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+                margin-bottom: 30px;
+            }
+            
+            .search-controls {
+                flex-direction: column;
+                align-items: center; /* Keep centered in column mode */
+            }
+            
+            select {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                margin-top: 15px; /* Ensure margin exists on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Sri Lanka National Major Division Chess Championships 2026</h1>
+        </header>
+
+        <section class="search-section">
+            <label for="provinceSelect" class="search-label">ඔබට අදාළ පළාත තෝරන්න</label>
+            <div class="search-controls">
+                <select id="provinceSelect">
+                    <option value="" disabled selected>-- පළාත තෝරන්න --</option>
+                </select>
+                <button id="searchBtn" class="btn">Search</button>
+                <div id="errorMsg" class="error-message">Please select a province to proceed.</div>
+            </div>
+        </section>
+
+        <div id="dashboard-area">
+        </div>
+
+        <div id="result-area">
+        </div>
+
+        <footer>
+            <p>&copy; <span id="year"></span> CHESS SAVIYA</p>
+        </footer>
+        
+        <div class="bottom-spacer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            const db = {
+                "western": {
+                    active: true,
+                    nameEn: "Western",
+                    nameSi: "බස්නාහිර",
+                    form: "https://forms.gle/demo_western",
+                    whatsapp: "https://chat.whatsapp.com/Joy4PL8ZwMgGWTqo1EIYtQ",
+                    img1: "https://i.postimg.cc/MpxCjxWT/MD_Western_Front.jpg",
+                    img2: "https://i.postimg.cc/T39ZVSw3/MD_Western_Back.jpg",
+                    pdf: "https://drive.google.com/file/d/1LTg3Riv2PHQeob7UAYit-K1wdEqNojf5/view?usp=drive_link"
+                },
+                "southern": {
+                    active: false,
+                    nameEn: "Southern",
+                    nameSi: "දකුණු",
+                    form: "https://forms.gle/demo_southern",
+                    whatsapp: "https://chat.whatsapp.com/demo_southern",
+                    img1: "https://via.placeholder.com/600x800?text=Southern+Front",
+                    img2: "https://via.placeholder.com/600x800?text=Southern+Back",
+                    pdf: "https://drive.google.com/file/d/1jLJ2uhTV5HsNfAsNA739vmtjZsBJm1wr/view?usp=drive_link"
+                },
+                "central": {
+                    active: false,
+                    nameEn: "Central",
+                    nameSi: "මධ්‍යම",
+                    form: "https://forms.gle/demo_central",
+                    whatsapp: "https://chat.whatsapp.com/demo_central",
+                    img1: "https://via.placeholder.com/600x800?text=Central+Front",
+                    img2: "https://via.placeholder.com/600x800?text=Central+Back",
+                    pdf: "https://drive.google.com/demo_central"
+                },
+                "sabaragamuwa": {
+                    active: true,
+                    nameEn: "Sabaragamuwa",
+                    nameSi: "සබරගමුව",
+                    form: "https://forms.gle/LmPZMxHXumXqC56Y7",
+                    whatsapp: "https://chat.whatsapp.com/CtH7OcXtWuu8xXgxFGHL0U?mode=gi_t",
+                    img1: "https://i.postimg.cc/d1dkXGg8/MD_Sabaragamuwa_Front.jpg",
+                    img2: "https://i.postimg.cc/RFf68w27/MD_Sabaragamuwa_Back.jpg",
+                    pdf: "https://drive.google.com/file/d/1QrxRVLRTP62vQ79nRbphugRSS_Yo1yGA/view?usp=drive_link"
+                },
+                "north_western": {
+                    active: false,
+                    nameEn: "North Western",
+                    nameSi: "වයඹ",
+                    form: "https://forms.gle/demo_north_western",
+                    whatsapp: "https://chat.whatsapp.com/demo_north_western",
+                    img1: "https://via.placeholder.com/600x800?text=North+Western+Front",
+                    img2: "https://via.placeholder.com/600x800?text=North+Western+Back",
+                    pdf: "https://drive.google.com/demo_north_western"
+                },
+                "northern": {
+                    active: true,
+                    nameEn: "Northern",
+                    nameSi: "උතුරු",
+                    form: "https://forms.gle/Ezz7SEgsABsa9NYM6",
+                    whatsapp: "https://chat.whatsapp.com/Gc2ySLVCiSZKAYys7nN8w0",
+                    img1: "https://i.postimg.cc/wjHCsH67/MD_Nothern_Front.jpg",
+                    img2: "https://i.postimg.cc/FHmMJm9f/MD_Nothern_Back.jpg",
+                    pdf: "https://drive.google.com/file/d/1GBKHdlYHzKO6KOhyI6sS7RNm_BVQ9Giz/view?usp=drive_link"
+                },
+                "north_central": {
+                    active: false,
+                    nameEn: "North Central",
+                    nameSi: "උතුරු මැද",
+                    form: "https://forms.gle/demo_north_central",
+                    whatsapp: "https://chat.whatsapp.com/demo_north_central",
+                    img1: "https://via.placeholder.com/600x800?text=North+Central+Front",
+                    img2: "https://via.placeholder.com/600x800?text=North+Central+Back",
+                    pdf: "https://drive.google.com/demo_north_central"
+                },
+                "eastern": {
+                    active: true,
+                    nameEn: "Eastern",
+                    nameSi: "නැගෙනහිර",
+                    form: "https://forms.gle/MkeW4ujcAN7f16wG7",
+                    whatsapp: "https://chat.whatsapp.com/CLlc40BbAsl72Tbi4PbpjO?mode=gi_t",
+                    img1: "https://i.postimg.cc/tg8n2BvJ/MD_Eastern_Front.jpg",
+                    img2: "https://i.postimg.cc/4dt7MpjY/MD_Eastern_Back.jpg",
+                    pdf: "https://drive.google.com/file/d/1jLJ2uhTV5HsNfAsNA739vmtjZsBJm1wr/view?usp=drive_link"
+                },
+                "uva": {
+                    active: false,
+                    nameEn: "Uva",
+                    nameSi: "ඌව",
+                    form: "https://forms.gle/MkeW4ujcAN7f16wG7",
+                    whatsapp: "https://chat.whatsapp.com/CLlc40BbAsl72Tbi4Pb",
+                    img1: "https://i.postimg.cc/tg8n2BvJ/MD_Easte.jpg",
+                    img2: "https://i.postimg.cc/4dt7MpjY/MD_East.jpg",
+                    pdf: "https://drive.google.com/demo_uva"
+                }
+            };
+
+            // 3. Populate Dropdown in Specific Order (Sinhala)
+            const selectEl = document.getElementById('provinceSelect');
+            
+            const provinceOrder = [
+                "western",          // බස්නාහිර
+                "southern",         // දකුණු
+                "central",          // මධ්‍යම
+                "sabaragamuwa",     // සබරගමුව
+                "north_western",    // වයඹ
+                "northern",         // උතුරු
+                "north_central",    // උතුරු මැද
+                "eastern",          // නැගෙනහිර
+                "uva"               // ඌව
+            ];
+            
+            provinceOrder.forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = db[key].nameSi + " පළාත";
+                selectEl.appendChild(option);
+            });
+
+            // 4. Initial Dashboard Logic (Province Based - Sinhala)
+            const dashboardArea = document.getElementById('dashboard-area');
+            const provinceKeys = Object.keys(db); // Get all keys for checking active status
+            const activeProvinces = provinceKeys.filter(key => db[key].active);
+            const inactiveProvinces = provinceKeys.filter(key => !db[key].active);
+            
+            const activeCount = activeProvinces.length;
+            const inactiveCount = inactiveProvinces.length;
+
+            let dashboardHTML = '';
+
+            // Scenario 1: All Provinces Active
+            if (inactiveCount === 0) {
+                dashboardHTML = `
+                    <div class="dashboard-full-msg">
+                        සියලුම පළාත් වලට අදාළව තරඟාවලි තොරතුරු ඇතුළත් කොට ඇත.
+                    </div>
+                `;
+            } 
+            // Scenario 2: If one or two provinces are missing
+            else if (inactiveCount === 1 || inactiveCount === 2) {
+                let exceptionText = "";
+                const missingNames = inactiveProvinces.map(key => db[key].nameSi);
+                
+                if (missingNames.length === 1) {
+                    exceptionText = `${missingNames[0]}`;
+                } else {
+                    exceptionText = `${missingNames[0]} හා ${missingNames[1]}`;
+                }
+
+                dashboardHTML = `
+                    <div class="dashboard-full-msg">
+                        ${exceptionText} පළාත් හැර අනෙකුත් සියලුම පළාත් වලට අදාළව තොරතුරු ඇතුළත් වී ඇත.
+                    </div>
+                `;
+            } 
+            // Scenario 3: If only one or up to six provinces are included (Sinhala Preview)
+            else if (activeCount >= 1 && activeCount <= 6) {
+                // Generate Sinhala List Items
+                let listItems = activeProvinces.map(key => `<li>${db[key].nameSi} පළාත</li>`).join('');
+                dashboardHTML = `
+                    <h3 class="dashboard-title">මෙතෙක් තරඟාවලියට අදාළව තොරතුරු ඇතුළත් වී ඇති පළාත්</h3>
+                    <ul class="active-districts-list">
+                        ${listItems}
+                    </ul>
+                `;
+            } 
+            // Scenario 4: No provinces published
+            else {
+                dashboardHTML = `<p>තවමත් කිසිදු පළාතකට අදාළව තොරතුරු ඇතුළත් වී නොමැත.</p>`;
+            }
+
+            dashboardArea.innerHTML = dashboardHTML;
+
+            // 5. Search Functionality
+            const searchBtn = document.getElementById('searchBtn');
+            const resultArea = document.getElementById('result-area');
+            const errorMsg = document.getElementById('errorMsg');
+
+            searchBtn.addEventListener('click', function() {
+                const selectedValue = selectEl.value;
+
+                // Validation
+                if (!selectedValue) {
+                    errorMsg.style.display = 'block';
+                    return;
+                }
+                
+                // Hide error if present
+                errorMsg.style.display = 'none';
+
+                // Switch Views: Hide Dashboard, Show Result
+                dashboardArea.style.display = 'none';
+                resultArea.style.display = 'none'; // Reset for animation
+
+                const data = db[selectedValue];
+                let htmlContent = '';
+
+                if (data.active) {
+                    // --- Render Active Content ---
+                    htmlContent = `
+                        <div class="district-header">${data.nameSi} පළාත</div>
+                        <div class="result-block">
+                            <div class="cta-group">
+                                <p class="cta-text">මෙම තරඟාවලිය සඳහා ලියාපදිංචි වීමට පහත Google Form එක සම්පූර්ණ කරන්න.</p>
+                                <a href="${data.form}" target="_blank" class="btn">Register Now >></a>
+                            </div>
+
+                            <div class="cta-group">
+                                <p class="cta-text">පහතින් තරඟාවලියේ ${data.nameSi} පළාතට අදාළ WhatsApp සමූහයට එකතු වෙන්න.</p>
+                                <a href="${data.whatsapp}" target="_blank" class="btn btn-whatsapp">Join WhatsApp Group >></a>
+                            </div>
+
+                            <div class="image-grid">
+                                <img src="${data.img1}" alt="${selectedValue} Tournament Details Front">
+                                <img src="${data.img2}" alt="${selectedValue} Tournament Details Back">
+                            </div>
+
+                            <div class="cta-group">
+                                <a href="${data.pdf}" target="_blank" class="btn">Download PDF</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // --- Render Not Available Message ---
+                    htmlContent = `
+                        <div class="pending-box">
+                            ${data.nameSi} පළාත සඳහා මෙතෙක් තරඟාවලියට අදාළ තොරතුරු ඇතුළත් වී නොමැත.
+                        </div>
+                    `;
+                }
+
+                // Inject and Show
+                resultArea.innerHTML = htmlContent;
+                resultArea.style.display = 'block';
+            });
+        });
+    </script>
+
+</body>
+</html>
