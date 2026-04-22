@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIDE Womens Candidates Winner 2026</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;600;700&family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-color: #0062FF;
+            --text-dark: #1a1a1a;
+            --text-gray: #555555;
+            --bg-light: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Serif Sinhala', serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: var(--brand-color);
+            color: var(--white);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content Styling */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Featured Image */
+        .featured-image-wrapper {
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .featured-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Article Text */
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            color: var(--text-gray);
+            text-align: justify;
+        }
+
+        /* In-article Images */
+        figure {
+            margin: 2.5rem 0;
+            width: 100%;
+        }
+
+        figure img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        figcaption {
+            margin-top: 0.1rem;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-align: center;
+            font-weight: 600;
+            font-style: italic;
+            font-family: 'Poppins', 'Noto Serif Sinhala', serif;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .bottom-spacer {
+            height: 4rem;
+            width: 100%;
+        }
+
+        /* ======================== */
+        /* STANDINGS TABLE STYLES   */
+        /* ======================== */
+        .standings-wrap {
+            font-family: 'Roboto', sans-serif;
+            margin: 2rem 0;
+        }
+
+        .standings-wrap .section-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--brand-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 98, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .standings-wrap .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: var(--brand-color);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .standings-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .standings-wrap th,
+        .standings-wrap td {
+            padding: 0.85rem 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .standings-wrap th {
+            background-color: rgba(0, 98, 255, 0.05);
+            color: var(--brand-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+        }
+
+        .standings-wrap tbody tr {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .standings-wrap tbody tr:hover {
+            background-color: rgba(0, 98, 255, 0.05);
+        }
+
+        .standings-wrap tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .standings-wrap tr.gold-row {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), rgba(255, 236, 179, 0.15));
+            border-left: 4px solid #ffc107;
+        }
+
+        .standings-wrap tr.gold-row:hover {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.25), rgba(255, 236, 179, 0.25));
+        }
+
+        .standings-wrap .rank-num {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #5f6368;
+            width: 36px;
+        }
+
+        .standings-wrap tr.gold-row .rank-num { color: #b8860b; }
+
+        .standings-wrap .player-info {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .standings-wrap .player-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid rgba(0, 98, 255, 0.15);
+        }
+
+        .standings-wrap .wgm-title {
+            background: var(--brand-color);
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-right: 4px;
+        }
+
+        .standings-wrap .flag {
+            width: 20px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+
+        .standings-wrap .fide-flag {
+            width: 20px;
+            height: 14px;
+            background-color: #4a6fa5;
+            border-radius: 2px;
+            display: inline-block;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+
+        .standings-wrap .player-name-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .standings-wrap .player-name-row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+
+        .standings-wrap .player-rating-small {
+            font-size: 0.78rem;
+            color: #5f6368;
+        }
+
+        .standings-wrap .pts-cell {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        .standings-wrap tr.gold-row .pts-cell { color: #b8860b; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal-content {
+            background: #ffffff;
+            color: #202124;
+            width: 100%;
+            max-width: 460px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 98, 255, 0.15);
+            position: relative;
+            animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.93) translateY(12px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px; right: 16px;
+            color: #aaa;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .modal-close:hover { color: #202124; }
+
+        .modal-header {
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+            border-bottom: 1px solid #e0e8ff;
+            background: linear-gradient(135deg, rgba(0,98,255,0.04), rgba(0,98,255,0.01));
+        }
+
+        #m-img {
+            width: 110px;
+            height: 140px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid rgba(0,98,255,0.15);
+        }
+
+        .modal-header-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .modal-header-info h2 {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #202124;
+            line-height: 1.3;
+        }
+
+        .modal-stat-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.92rem;
+        }
+
+        .modal-rating {
+            font-weight: 700;
+            color: var(--brand-color);
+            font-size: 1rem;
+        }
+
+        .modal-pts {
+            font-size: 0.92rem;
+            color: #5f6368;
+        }
+
+        .modal-pts strong {
+            color: #202124;
+            font-size: 1rem;
+        }
+
+        .modal-header .flag { width: 22px; margin-left: 0; }
+        .modal-header .fide-flag { width: 22px; height: 15px; margin-left: 0; }
+
+        .modal-body {
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .modal-body::-webkit-scrollbar { width: 6px; }
+        .modal-body::-webkit-scrollbar-track { background: #f0f4ff; }
+        .modal-body::-webkit-scrollbar-thumb { background: #a8c0ff; border-radius: 3px; }
+
+        .modal-matches-title {
+            padding: 10px 20px 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #5f6368;
+            border-bottom: 1px solid #eef2ff;
+        }
+
+        .modal-match-row {
+            display: flex;
+            align-items: center;
+            padding: 9px 20px;
+            font-size: 0.88rem;
+            gap: 6px;
+        }
+
+        .modal-match-row:nth-child(even) { background: #f4f7f6; }
+
+        .col-rnd { width: 28px; font-weight: 700; color: #aaa; font-size: 0.8rem; flex-shrink: 0; }
+        .col-gm  { background: var(--brand-color); color: #fff; padding: 1px 5px; border-radius: 3px; font-size: 0.68rem; font-weight: 700; flex-shrink: 0; }
+        .col-flag { flex-shrink: 0; }
+        .col-name { flex: 1; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .col-color { width: 22px; text-align: center; flex-shrink: 0; }
+        .color-box { display: inline-block; width: 11px; height: 11px; border-radius: 2px; border: 1px solid #999; vertical-align: middle; }
+        .color-w { background: #fff; }
+        .color-b { background: #333; }
+        .col-res { width: 32px; text-align: right; font-weight: 900; font-size: 0.95rem; flex-shrink: 0; }
+        .res-win  { color: #2e7d32; }
+        .res-loss { color: #c62828; }
+        .res-draw { color: #5f6368; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.2rem;
+                width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            h1 { font-size: 1.4rem; }
+
+            .article-content p {
+                font-size: 1rem;
+                text-align: left;
+            }
+
+            header {
+                padding: 0.8rem 0;
+                margin-bottom: 0;
+            }
+
+            figure { margin: 2rem 0; }
+
+            .standings-wrap th,
+            .standings-wrap td { padding: 0.65rem 0.5rem; }
+
+            .standings-wrap .player-img { width: 36px; height: 36px; }
+
+            #m-img { width: 85px; height: 110px; }
+            .modal-header-info h2 { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        
+        <h1>FIDE Candidates 2026 කාන්තා අංශයේ ශූරතාවය ඉන්දියාවට</h1>
+
+        <div class="featured-image-wrapper">
+            <img src="https://i.postimg.cc/XJV8PYNR/3.jpg" alt="FIDE Womens Candidates Winners">
+        </div>
+
+        <div class="article-content">
+            <p>ලෝක ශූරතාවය සඳහා ක්‍රීඩා කරන අපේක්ෂකයා තෝරා ගැනීමේ තරඟාවලිය මෙවර මාර්තු මස 29 සිට අප්‍රේල් මස 15 දක්වා සයිප්‍රස් හිදී පැවැත්විණි.</p>
+
+            <p>මෙම තරඟාවලියේ කාන්තා අංශය සඳහා ද ක්‍රීඩකයින් අට දෙනෙකු සුදුසුකම් ලබා ගත් අතර Double Round Robin ආකාරයට පවත්වන ලද මෙම තරඟාවලිය තරඟ වට 14 කින් සමන්විත විය. ඒ අනුව සෑම ක්‍රීඩකයෙක්ම සියලුම ප්‍රතිවාදී ක්‍රීඩකයින් සමඟ තරඟ වට දෙක බැගින් ක්‍රීඩා කරනු ලබයි.</p>
+
+            <p>ඉතා තියුණු මුහුණුවරක් ගත් FIDE Candidates 2026 කාන්තා අංශයේ තරඟාවලියේ තරඟ වට 14 අවසානයේ ලකුණු 8.5ක ප්‍රමාණයක් හිමිකර ගනිමින් ඉන්දියාවේ GM Vaishali Rameshbahu ශූරතාවය හිමිකර ගන්නා ලදි.</p>
+            
+            <figure>
+                <img src="https://i.postimg.cc/nzHkWhct/5.jpg" alt="Vaishali playing">
+                <figcaption></figcaption>
+            </figure>
+
+            <p>ප්‍රබල අභියෝගයක් එල්ල කළ කසකස්ථානයේ GM Bibisara Assaubayewa ලකුණු 8ක ප්‍රමාණයක් ලබා ගනිමින් දෙවන ස්ථානයට පත්වූ අතර 7.5ක ලකුණු ප්‍රමාණයක් හිමිකර ගනිමින් චීනයේ GM Zhu Jiner තුන්වන ස්ථානය හිමිකර ගන්නා ලදි.</p>
+            
+            <figure>
+                <img src="https://i.postimg.cc/FRDZXX16/7.jpg" alt="Divya vs Bibisara">
+                <figcaption></figcaption>
+            </figure>
+
+            <p>මෙම කාන්තා අංශයේ තරඟාවලියේ එක් එක් ක්‍රීඩකයින් විසින් ලබා ගත් ලකුණු ප්‍රමාණයන් ඇතුළත් වන සවිස්තරාත්මක ලකුණු සටහන පහතින් දැක්වේ.</p>
+
+            <!-- ===== FINAL STANDINGS TABLE ===== -->
+            <div class="standings-wrap">
+                <div class="section-title">Final Standings</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Player</th>
+                            <th>Pts.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standings-body"></tbody>
+                </table>
+            </div>
+            <!-- ===== END STANDINGS TABLE ===== -->
+
+            <p>ඒ අනුව කාන්තා ලෝක චෙස් ශූරතාවලිය සඳහා පස් වරක් ශූරතාවය හිමිකර ගත් වත්මන් කාන්තා චෙස් ලෝක ශූර චීනයේ GM Ju Wenjun සමඟ ඉන්දියාවේ GM Vaishali Rameshbahu තරඟ වැදීමට නියමිතයි.</p>
+            
+            <figure>
+                <img src="https://i.postimg.cc/SsyrPxQw/2.jpg" alt="Wenjun vs Vaishali">
+                <figcaption></figcaption>
+            </figure>
+            
+            <figure>
+                <img src="https://i.postimg.cc/ydvPCCWb/6.jpg" alt="FIDE Womens Candidates">
+                <figcaption></figcaption>
+            </figure>
+            
+            <figure>
+                <img src="https://i.postimg.cc/Hxp2NksG/4.jpg" alt="FIDE Womens Candidates Winner">
+                <figcaption></figcaption>
+            </figure>
+        </div>
+
+        <footer>
+            <p>&copy; <span id="year"></span> CHESS SAVIYA NEWS</p>
+        </footer>
+
+    </main>
+
+    <div class="bottom-spacer"></div>
+
+    <!-- Player Detail Modal -->
+    <div class="modal-overlay" id="player-modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal(event)" aria-label="Close">&times;</button>
+            <div class="modal-header">
+                <img id="m-img" src="" alt="">
+                <div class="modal-header-info">
+                    <h2 id="m-name"></h2>
+                    <div class="modal-stat-row">
+                        <span id="m-flag-container"></span>
+                        <span class="modal-rating" id="m-rating"></span>
+                    </div>
+                    <div class="modal-stat-row">
+                        <span class="modal-pts" id="m-pts"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-matches-title">Round by Round Results</div>
+                <div id="m-matches"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dynamic Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ===== STANDINGS DATA & LOGIC =====
+        const playersDB = {
+            vaishali:    { rank:1, name:"Vaishali Rameshbabu", title:"GM", flag:"in", rating:2470, pts:"8.5", img:"https://imgur.com/HF69ojE.png", matches:[{round:1,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"1/2"},{round:2,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1/2"},{round:3,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"1/2"},{round:4,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"1/2"},{round:5,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"0"},{round:6,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"1"},{round:7,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"1"},{round:8,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"1/2"},{round:9,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"1"},{round:10,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"1/2"},{round:11,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"1"},{round:12,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"0"},{round:13,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1/2"},{round:14,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"1"}] },
+            assaubayeva: { rank:2, name:"Bibisara Assaubayeva", title:"GM", flag:"kz", rating:2516, pts:"8", img:"https://imgur.com/FhwBpz4.png", matches:[{round:1,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"1/2"},{round:2,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"1/2"},{round:3,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"1"},{round:4,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"1/2"},{round:5,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"1/2"},{round:6,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"0"},{round:7,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"1/2"},{round:8,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"1/2"},{round:9,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"1/2"},{round:10,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"1"},{round:11,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1/2"},{round:12,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"1"},{round:13,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"1"},{round:14,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1/2"}] },
+            zhu:         { rank:3, name:"Zhu Jiner", title:"GM", flag:"cn", rating:2578, pts:"7.5", img:"https://imgur.com/MB4OL5B.png", matches:[{round:1,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"1/2"},{round:2,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"1/2"},{round:3,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"0"},{round:4,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1"},{round:5,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"1"},{round:6,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"0"},{round:7,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"1/2"},{round:8,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1"},{round:9,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"1"},{round:10,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"0"},{round:11,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"1/2"},{round:12,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"1"},{round:13,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"0"},{round:14,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"1/2"}] },
+            goryachkina: { rank:4, name:"Aleksandra Goryachkina", title:"GM", flag:"fide", rating:2534, pts:"7.5", img:"https://imgur.com/qEyfojQ.png", matches:[{round:1,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"1/2"},{round:2,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"1/2"},{round:3,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"1/2"},{round:4,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"1/2"},{round:5,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"1/2"},{round:6,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1/2"},{round:7,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"1/2"},{round:8,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"0"},{round:9,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"1/2"},{round:10,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1"},{round:11,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"0"},{round:12,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"1/2"},{round:13,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"1"},{round:14,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"1"}] },
+            muzychuk:    { rank:5, name:"Anna Muzychuk", title:"GM", flag:"ua", rating:2522, pts:"7", img:"https://imgur.com/alol8Bv.png", matches:[{round:1,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1/2"},{round:2,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"1/2"},{round:3,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"1/2"},{round:4,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"1"},{round:5,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"1/2"},{round:6,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"1"},{round:7,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"1/2"},{round:8,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"0"},{round:9,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1/2"},{round:10,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"1/2"},{round:11,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"1/2"},{round:12,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"1/2"},{round:13,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"0"},{round:14,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"1/2"}] },
+            lagno:       { rank:6, name:"Kateryna Lagno", title:"GM", flag:"fide", rating:2508, pts:"6.5", img:"https://imgur.com/l2B9bHs.png", matches:[{round:1,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"1/2"},{round:2,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"1/2"},{round:3,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1"},{round:4,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"0"},{round:5,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"1"},{round:6,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"0"},{round:7,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1/2"},{round:8,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"1"},{round:9,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"0"},{round:10,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"1/2"},{round:11,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"1/2"},{round:12,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"0"},{round:13,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"1"},{round:14,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"0"}] },
+            tan:         { rank:7, name:"Tan Zhongyi", title:"GM", flag:"cn", rating:2535, pts:"5.5", img:"https://imgur.com/oFwFcDG.png", matches:[{round:1,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"1/2"},{round:2,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"1/2"},{round:3,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"0"},{round:4,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"1/2"},{round:5,oppName:"Divya Deshmukh",oppFlag:"in",color:"w",result:"1/2"},{round:6,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"1/2"},{round:7,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"0"},{round:8,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"0"},{round:9,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"1/2"},{round:10,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"1/2"},{round:11,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"1/2"},{round:12,oppName:"Divya Deshmukh",oppFlag:"in",color:"b",result:"1"},{round:13,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"1/2"},{round:14,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"0"}] },
+            deshmukh:    { rank:8, name:"Divya Deshmukh", title:"GM", flag:"in", rating:2497, pts:"5.5", img:"https://imgur.com/dXOO1Xz.png", matches:[{round:1,oppName:"Anna Muzychuk",oppFlag:"ua",color:"w",result:"1/2"},{round:2,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"w",result:"1/2"},{round:3,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"b",result:"1/2"},{round:4,oppName:"Zhu Jiner",oppFlag:"cn",color:"w",result:"0"},{round:5,oppName:"Tan Zhongyi",oppFlag:"cn",color:"b",result:"1/2"},{round:6,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"b",result:"1"},{round:7,oppName:"Kateryna Lagno",oppFlag:"fide",color:"w",result:"1/2"},{round:8,oppName:"Anna Muzychuk",oppFlag:"ua",color:"b",result:"1"},{round:9,oppName:"Vaishali Rameshbabu",oppFlag:"in",color:"b",result:"0"},{round:10,oppName:"Aleksandra Goryachkina",oppFlag:"fide",color:"w",result:"0"},{round:11,oppName:"Zhu Jiner",oppFlag:"cn",color:"b",result:"1/2"},{round:12,oppName:"Tan Zhongyi",oppFlag:"cn",color:"w",result:"0"},{round:13,oppName:"Kateryna Lagno",oppFlag:"fide",color:"b",result:"0"},{round:14,oppName:"Bibisara Assaubayeva",oppFlag:"kz",color:"w",result:"1/2"}] }
+        };
+
+        function getFlagHtml(code, size) {
+            const s = size || 20;
+            if (code && code !== 'fide') {
+                return `<img src="https://flagcdn.com/w40/${code.toLowerCase()}.png" width="${s}" alt="${code}" class="flag">`;
+            }
+            return `<span class="fide-flag" title="FIDE"></span>`;
+        }
+
+        function resultClass(r) {
+            return r === "1" ? "res-win" : r === "0" ? "res-loss" : "res-draw";
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById("standings-body");
+            tbody.innerHTML = "";
+            Object.entries(playersDB)
+                .sort((a, b) => a[1].rank - b[1].rank)
+                .forEach(([key, p], idx) => {
+                    const tr = document.createElement("tr");
+                    if (idx === 0) tr.classList.add("gold-row");
+                    tr.onclick = () => openModal(key);
+                    tr.innerHTML = `
+                        <td class="rank-num">${p.rank}</td>
+                        <td>
+                            <div class="player-info">
+                                <img src="${p.img}" alt="${p.name}" class="player-img"
+                                     onerror="this.src='https://via.placeholder.com/44x44/e0e8ff/0062ff?text=${p.name[0]}'">
+                                <div class="player-name-wrap">
+                                    <div class="player-name-row">
+                                        <span class="wgm-title">${p.title}</span>
+                                        ${getFlagHtml(p.flag, 20)}
+                                        <strong style="margin-left:6px">${p.name}</strong>
+                                    </div>
+                                    <span class="player-rating-small">Rating: ${p.rating}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="pts-cell">${p.pts}</td>`;
+                    tbody.appendChild(tr);
+                });
+        }
+
+        function openModal(key) {
+            const p = playersDB[key];
+            if (!p) return;
+            document.getElementById("m-img").src = p.img;
+            document.getElementById("m-name").innerText = p.name;
+            document.getElementById("m-flag-container").innerHTML = getFlagHtml(p.flag, 22);
+            document.getElementById("m-rating").innerText = p.rating;
+            document.getElementById("m-pts").innerHTML = `Points: <strong>${p.pts} / 14</strong> &nbsp;|&nbsp; Rank: <strong>#${p.rank}</strong>`;
+            document.getElementById("m-matches").innerHTML = p.matches.map(m => `
+                <div class="modal-match-row">
+                    <span class="col-rnd">R${m.round}</span>
+                    <span class="col-gm">GM</span>
+                    <span class="col-flag">${getFlagHtml(m.oppFlag, 18)}</span>
+                    <span class="col-name">${m.oppName}</span>
+                    <span class="col-color">
+                        <span class="color-box ${m.color === 'w' ? 'color-w' : 'color-b'}" title="${m.color === 'w' ? 'White' : 'Black'}"></span>
+                    </span>
+                    <span class="col-res ${resultClass(m.result)}">${m.result}</span>
+                </div>`).join("");
+            document.getElementById("player-modal").classList.add("open");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(e) {
+            document.getElementById("player-modal").classList.remove("open");
+            document.body.style.overflow = "";
+        }
+
+        document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+        renderTable();
+    </script>
+
+</body>
+</html>
